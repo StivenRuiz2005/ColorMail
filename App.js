@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { SavedPalettesProvider } from './src/context/SavedPalettesContext';
+
+import HomeScreen from './src/screens/HomeScreen';
+import SavedColorScreen from './src/screens/SavedColorsScreen';
+import CameraScreen from './src/screens/CameraScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SavedPalettesProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Saved Colors" component={SavedColorScreen} />
+          <Tab.Screen name="Camera" component={CameraScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SavedPalettesProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
